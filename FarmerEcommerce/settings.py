@@ -26,10 +26,10 @@ SECRET_KEY = 'django-insecure-hbhsk_#5xp8_=2ibm=fba-2@4w@d_c=od256*j2_^5el8$12f5
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
-RAZORPAY_API_KEY = 'rzp_test_fRtqZZVid7nJAj'
-RAZORPAY_API_SECRET = 'Pj4JnWv1VGS6DyieDjTac0cd'
-
+                    
+RAZORPAY_API_KEY = '***_***_***************'
+RAZORPAY_API_SECRET = '**************************'
+                       
 import os
 
 # Media files settings
