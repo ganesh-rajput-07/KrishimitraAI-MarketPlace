@@ -92,4 +92,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 
 ## 🌟 Give this repo a ⭐ if you found it helpful!
-```
