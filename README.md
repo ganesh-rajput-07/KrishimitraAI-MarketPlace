@@ -7,9 +7,6 @@
 - 👨‍🌾 Farmer Dashboard  
 - 🛒 Consumer Marketplace  
 - 🧑‍💼 Admin Control Panel  
-- 🚚 Delivery Dashboard  
-- 📱 Mobile-Friendly Modern UI  
-- 🎨 Gradient animated background with smooth transitions
 
 
 ## ⚙️ Setup Instructions
@@ -50,8 +47,6 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
----
-
 ## 🔑 Accessing Dashboards
 
 - Admin Panel → `http://localhost:8000/admin`
@@ -61,7 +56,7 @@ python manage.py runserver
 
 > Make sure to register/login as needed for each dashboard access.
 
----
+
 
 ## 📁 Project Structure (Simplified)
 
@@ -76,29 +71,22 @@ krishimitra-ai-marketplace/
 └── requirements.txt
 ```
 
----
-
 ## 🧠 Future Scope
 
 - AI-based crop suggestion & market insights  
 - Drone & IoT integration for real-time monitoring  
 - Smart alerts for farmers and consumers
 
----
 
 ## 🛡️ License
 
 MIT License © 2025 Ganesh Rajput
 
----
 
 ## 🙌 Contribution
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
----
 
 ## 🌟 Give this repo a ⭐ if you found it helpful!
 ```
-
----
