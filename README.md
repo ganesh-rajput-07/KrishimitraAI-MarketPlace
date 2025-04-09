@@ -1,6 +1,3 @@
----
-
-```markdown
 # 🌾 Krishimitra AI Marketplace
 
 **Krishimitra AI** is an AI-powered eCommerce platform connecting farmers, consumers, admins, and delivery agents — built with Django for a smarter, agriculture-friendly future.
@@ -14,13 +11,12 @@
 - 📱 Mobile-Friendly Modern UI  
 - 🎨 Gradient animated background with smooth transitions
 
----
 
 ## ⚙️ Setup Instructions
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/krishimitra-ai-marketplace.git
+git clone https://github.com/ganesh-rajput-07/KrishimitraAI-MarketPlace.git
 cd krishimitra-ai-marketplace
 ```
 
