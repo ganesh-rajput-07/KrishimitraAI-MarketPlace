@@ -17,6 +17,7 @@ git clone https://github.com/ganesh-rajput-07/KrishimitraAI-MarketPlace.git
 cd krishimitra-ai-marketplace
 ```
 
+
 ### 2. Create & Activate Virtual Environment
 ```bash
 python -m venv venv
@@ -26,10 +27,12 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
+
 ### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
+
 
 ### 4. Apply Migrations
 ```bash
@@ -37,10 +40,12 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+
 ### 5. Create Superuser (for admin access)
 ```bash
 python manage.py createsuperuser
 ```
+
 
 ### 6. Run the Development Server
 ```bash
@@ -55,7 +60,6 @@ python manage.py runserver
 > Make sure to register/login as needed for each dashboard access.
 
 
-
 ## 📁 Project Structure (Simplified)
 
 ```
@@ -68,6 +72,7 @@ krishimitra-ai-marketplace/
 ├── manage.py
 └── requirements.txt
 ```
+
 
 ## 🧠 Future Scope
 
