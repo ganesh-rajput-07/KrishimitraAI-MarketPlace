@@ -52,8 +52,6 @@ python manage.py runserver
 - Admin Panel → `http://localhost:8000/admin`
 - Farmer Dashboard → `/farmer`
 - Consumer Dashboard → `/consumer`
-- Delivery Dashboard → `/delivery`
-
 > Make sure to register/login as needed for each dashboard access.
 
 
