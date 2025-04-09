@@ -1,0 +1,34 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Product</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Product Name</label>
+            <input type="text" name="name" class="form-control" id="id_name" value="{{ product.name }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_price" class="form-label">Price</label>
+            <input type="number" name="price" class="form-control" id="id_price" value="{{ product.price }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_quantity" class="form-label">Quantity</label>
+            <input type="number" name="quantity" class="form-control" id="id_quantity" value="{{ product.quantity }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_category" class="form-label">Category</label>
+            <select name="category" class="form-control" id="id_category">
+                <option value="vegetables" {% if product.category == 'vegetables' %}selected{% endif %}>Vegetables</option>
+                <option value="fruits" {% if product.category == 'fruits' %}selected{% endif %}>Fruits</option>
+                <option value="dairy" {% if product.category == 'dairy' %}selected{% endif %}>Dairy</option>
+                <option value="grains" {% if product.category == 'grains' %}selected{% endif %}>Grains</option>
+                <option value="other" {% if product.category == 'other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a href="{% url 'admin_product_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

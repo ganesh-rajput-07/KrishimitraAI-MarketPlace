@@ -1,0 +1,120 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #28a745 !important; /* Green color for agriculture theme */
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #ffc107 !important; /* Yellow color for hover effect */
+}
+
+/* Cards */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-radius: 10px 10px 0 0;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+
+/* Buttons */
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+/* Custom Navbar Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffc107 !important; /* Highlight color on hover */
+}
+
+.dropdown-menu {
+    background-color: #28a745; /* Match navbar color */
+}
+
+.dropdown-item {
+    color: white !important;
+}
+
+.dropdown-item:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+/* static/css/styles.css */
+.card {
+    border-radius: 15px;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}

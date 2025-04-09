@@ -1,0 +1,66 @@
+<!-- templates/orders/payment_callback.html -->
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header {% if payment_success %}bg-success{% else %}bg-danger{% endif %} text-white">
+            <h2 class="text-center">
+                {% if payment_success %}
+                    Payment Successful!
+                {% else %}
+                    Payment Failed
+                {% endif %}
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="text-center">
+                {% if payment_success %}
+                    <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+                    <h3>Thank You for Your Payment!</h3>
+                    <p>Your payment has been processed successfully.</p>
+                {% else %}
+                    <i class="fas fa-times-circle fa-5x text-danger mb-4"></i>
+                    <h3>Payment Failed</h3>
+                    <p>There was an issue processing your payment. Please try again.</p>
+                {% endif %}
+            </div>
+            <div class="mt-4">
+                <h4>Order Details</h4>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Order ID</th>
+                        <td>{{ order.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price</th>
+                        <td>Rs. {{ order.total_price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Order Date</th>
+                        <td>{{ order.created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th>Shipping Address</th>
+                        <td>{{ order.shipping_address }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-center mt-4">
+                {% if payment_success %}
+                    <a href="{% url 'customer_home' %}" class="btn btn-success">
+                        <i class="fas fa-shopping-cart"></i> Continue Shopping
+                    </a>
+                    <a href="{% url 'orders:order_detail' order.id %}" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> View Order Details
+                    </a>
+                {% else %}
+                    <a href="{% url 'orders:payment' order.id %}" class="btn btn-danger">
+                        <i class="fas fa-credit-card"></i> Retry Payment
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'customer/customer_base.html' %}
+{% load custom_filters %}
+{% block content %}
+<h2>Your Cart</h2>
+<form method="post">
+    {% csrf_token %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+                <tr>
+                    <!-- Product Name -->
+                    <td>
+                        <strong>{{ item.product.name }}</strong>
+                    </td>
+                    <!-- Quantity -->
+                    <td>
+                        <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1" class="form-control" style="width: 70px;">
+                        
+                    </td>
+                    <!-- Price -->
+                    <td style="text-align: left;">
+                        Rs. {{ item.product.price|floatformat:2 }}/{{ item.product.get_variation_display }}
+                    </td>
+                    <!-- Total -->
+                    <td style="text-align: left;">
+                        Rs. {{ item.product.price|mul:item.quantity|floatformat:2 }}
+                    </td>
+                    <!-- Actions -->
+                    <td>
+                        <a href="{% url 'cart:remove_from_cart' item.id %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i> Remove
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <!-- Cart Total -->
+    <p><strong>Total: Rs. {{ cart.total_price|floatformat:2 }}</strong></p>
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-success">Update Cart</button>
+    <a href="{% url 'orders:checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+</form>
+{% endblock %}

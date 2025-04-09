@@ -1,0 +1,30 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block content %}
+<h2>Order List</h2>
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer.user.username }}</td>
+                <td>Rs. {{ order.total_price }}</td>
+                <td>{{ order.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'admin_update_order_status' order.id %}" class="btn btn-warning btn-sm" class="fas fa-edit">Update Status</a>
+                    <a href="{% url 'admin_order_detail' order.id %}" class="btn btn-info btn-sm" class="fas fa-eye">View Details</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Order Details</h2>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Customer:</strong> {{ order.customer.user.username }}</p>
+    <p><strong>Total Price:</strong> Rs. {{ order.total_price }}</p>
+    <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+    <p><strong>Order Date:</strong> {{ order.created_at }}</p>
+    <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+
+    <h3>Order Items</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.order_items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }} {{item.product.get_variation_display}}</td>
+                    <td>Rs. {{ item.price }}</td>
+                    <td>Rs. {{ item.total_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'admin_order_list' %}" class="btn btn-secondary">Back to Orders</a>
+</div>
+{% endblock %}

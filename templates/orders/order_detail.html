@@ -1,0 +1,100 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h2 class="card-title mb-0" style="color: #f8f9fa;">Order Details</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Total Price:</strong> Rs. {{ order.total_price }}</p>
+            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            <p><strong>Order Date:</strong> {{ order.created_at }}</p>
+            <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+
+            <h3 class="mt-4">Order Items</h3>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in order_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }} {{ item.product.get_variation_display }}</td>
+                            <td>Rs. {{ item.product.price|floatformat:2 }}/{{ item.product.get_variation_display }}</td>
+                            <td>Rs. {{ item.total_price }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    /* Stylish Order Details Page */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #28a745;
+    padding: 1.5rem;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table td, .table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.text-success {
+    color: #28a745 !important;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #555;
+}
+
+.text-muted {
+    font-size: 1rem;
+    color: #6c757d;
+}
+</style>
+{% endblock %}

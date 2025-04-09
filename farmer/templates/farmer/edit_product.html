@@ -1,0 +1,18 @@
+<!-- templates/farmer/edit_product.html -->
+{% extends 'farmer/farmer_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Save
+        </button>
+        <a href="{% url 'farmer_product_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

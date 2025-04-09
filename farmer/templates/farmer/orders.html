@@ -1,0 +1,51 @@
+{% extends 'farmer/farmer_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Orders</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Mobile</th>
+                    <th>Shipping Address</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    {% for item in order.order_items.all %}
+                        {% if item.product.farmer == request.user.farmer %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.customer_name }}</td>
+                                <td>{{ order.customer_mobile }}</td>
+                                <td>{{ order.shipping_address }}</td>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>Rs. {{ item.total_price }}</td>
+                                <td>{{ order.get_status_display }}</td>
+                                <td>
+                                    <a href="{% url 'update_order_status' order.id %}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Update Status
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% empty %}
+                    <tr>
+                        <td colspan="9" class="text-center">No orders found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

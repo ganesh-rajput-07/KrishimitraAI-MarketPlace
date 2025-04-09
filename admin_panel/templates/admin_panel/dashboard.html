@@ -1,0 +1,46 @@
+{% extends 'admin_panel/admin_base.html' %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="row">
+    <!-- Total Users Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <p class="card-text">{{ total_users }}</p>
+                <a href="{% url 'admin_user_list' %}" class="btn btn-light">Manage Users</a>
+            </div>
+        </div>
+    </div>
+    <!-- Total Products Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <p class="card-text">{{ total_products }}</p>
+                <a href="{% url 'admin_product_list' %}" class="btn btn-light">Manage Products</a>
+            </div>
+        </div>
+    </div>
+    <!-- Total Orders Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Total Orders</h5>
+                <p class="card-text">{{ total_orders }}</p>
+                <a href="{% url 'admin_order_list' %}" class="btn btn-light">Manage Orders</a>
+            </div>
+        </div>
+    </div>
+    <!-- Total Earnings Card -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Total Earnings</h5>
+                <p class="card-text">Rs. {{ total_earnings }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

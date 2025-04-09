@@ -1,0 +1,77 @@
+<!-- templates/farmer/dashboard.html -->
+{% extends 'farmer/farmer_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome, {{ farmer.user.username }}!</h2>
+    <div class="row mt-4">
+        <!-- Total Products Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text">{{ products.count }}</p>
+                    <a href="{% url 'farmer_product_list' %}" class="btn btn-light">View Products</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Orders Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text">{{ orders.count }}</p>
+                    <a href="{% url 'farmer_orders' %}" class="btn btn-light">View Orders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Earnings Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">Total Earnings</h5>
+                    <p class="card-text">Rs. {{ total_earnings }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Section -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="card-title">Notifications</h5>
+        </div>
+        <div class="card-body">
+            {% if notifications %}
+                <ul class="list-group">
+                    {% for notification in notifications %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                {{ notification.message }}
+                                <small class="text-muted">{{ notification.created_at }}</small>
+                            </div>
+                            {% if not notification.is_read %}
+                                <a href="{% url 'mark_notification_as_read' notification.id %}" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i> Mark as Read
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">No new notifications.</p>
+            {% endif %}
+            <a href="{% url 'farmer_notifications' %}" class="btn btn-secondary mt-3">View All Notifications</a>
+        </div>
+    </div>
+
+    <!-- Link to Analytics Page -->
+    <div class="mt-4">
+        <a href="{% url 'farmer_analytics' %}" class="btn btn-primary">
+            <i class="fas fa-chart-line"></i> View Analytics
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+<!-- templates/orders/payment.html -->
+{% extends 'customer/customer_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white">
+                    <h2 class="card-title text-center mb-0" style="color: aliceblue;">
+                        <i class="fas fa-credit-card"></i> Payment
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5 class="text-muted">Billing Address</h5>
+                        <p class="lead">{{ address }}</p>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="text-muted">Total Amount</h5>
+                        <p class="lead text-success">Rs. {{ total_price }}</p>
+                    </div>
+                    <form action="{% url 'orders:payment_callback' %}" method="POST">
+                        {% csrf_token %}
+                        <script src="https://checkout.razorpay.com/v1/checkout.js" 
+                            data-key="{{ razorpay_key }}" 
+                            data-amount="{{ razorpay_amount }}" 
+                            data-currency="{{ razorpay_currency }}" 
+                            data-order_id="{{ razorpay_order_id }}" 
+                            data-buttontext="Pay Now" 
+                            data-name="{{ customer.user.username }}" 
+                            data-description="Payment for Order" 
+                            data-image="{% static 'images/logo.png' %}" 
+                            data-prefill.name="{{ request.user.username }}" 
+                            data-prefill.email="{{ request.user.email }}" 
+                            data-theme.color="#28a745">
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>/* Stylish Payment Page */
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background-color: #28a745;
+        padding: 1.5rem;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .card-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    .card-body {
+        padding: 2rem;
+    }
+    
+    .lead {
+        font-size: 1.25rem;
+        font-weight: 300;
+        color: #555;
+    }
+    
+    .text-muted {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    
+    .text-success {
+        color: #28a745 !important;
+    }
+    
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }</style>
+{% endblock %}

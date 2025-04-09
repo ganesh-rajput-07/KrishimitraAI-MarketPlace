@@ -1,0 +1,44 @@
+{% extends 'farmer/farmer_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-control" id="id_first_name" value="{{ user.first_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Last Name</label>
+            <input type="text" name="last_name" class="form-control" id="id_last_name" value="{{ user.last_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="id_username" value="{{ user.username }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="id_email" value="{{ user.email }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_phone_number" class="form-label">Mobile Number</label>
+            <input type="text" name="phone_number" class="form-control" id="id_phone_number" value="{{ farmer.phone_number }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_farm_name" class="form-label">Farm Name</label>
+            <input type="text" name="farm_name" class="form-control" id="id_farm_name" value="{{ farmer.farm_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_location" class="form-label">Location</label>
+            <input type="text" name="location" class="form-control" id="id_location" value="{{ farmer.location }}">
+        </div>
+        <div class="mb-3">
+            <label for="id_profile_photo" class="form-label">Profile Photo</label>
+            <input type="file" name="profile_photo" class="form-control" id="id_profile_photo">
+        </div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a href="{% url 'farmer_profile' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

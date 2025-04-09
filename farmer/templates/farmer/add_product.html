@@ -1,0 +1,48 @@
+<!-- templates/farmer/add_product.html -->
+{% extends 'farmer/farmer_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Product</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Product Name</label>
+            {{ form.name }}
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Description</label>
+            {{ form.description }}
+        </div>
+        <div class="mb-3">
+            <label for="id_base_price" class="form-label">Base Price</label>
+            {{ form.base_price }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_variation" class="form-label">Variation</label>
+            {{ form.variation }}
+        </div>
+        <div class="mb-3">
+            <label for="id_quantity" class="form-label">Quantity</label>
+            {{ form.quantity }}
+        </div>
+        <div class="mb-3">
+            <label for="id_image" class="form-label">Product Image</label>
+            {{ form.image }}
+        </div>
+        <div class="mb-3">
+            <label for="id_category" class="form-label">Category</label>
+            {{ form.category }}
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Save
+        </button>
+        <a href="{% url 'farmer_product_list' %}" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+        </a>
+    </form>
+</div>
+
+
+{% endblock %}

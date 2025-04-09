@@ -1,0 +1,34 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            <h2 class="text-center">Checkout</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <h3>Enter Shipping Address</h3>
+                <div class="mb-3">
+                    <label for="id_street" class="form-label">Street</label>
+                    <input type="text" name="street" class="form-control" id="id_street" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_city" class="form-label">City</label>
+                    <input type="text" name="city" class="form-control" id="id_city" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_state" class="form-label">State</label>
+                    <input type="text" name="state" class="form-control" id="id_state" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_zip_code" class="form-label">Zip Code</label>
+                    <input type="text" name="zip_code" class="form-control" id="id_zip_code" required>
+                </div>
+                <button type="submit" class="btn btn-success mt-3">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

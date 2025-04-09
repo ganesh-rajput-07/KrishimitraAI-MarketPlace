@@ -1,0 +1,58 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<h2>Welcome, {{user.username}} !</h2>
+<form method="get" action="{% url 'customer_home' %}" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search products..." value="{{ query }}">
+        <select name="category" class="form-select">
+            <option value="" {% if not category %}selected{% endif %}>All Categories</option>
+            <option value="vegetables" {% if category == "vegetables" %}selected{% endif %}>Vegetables</option>
+            <option value="fruits" {% if category == "fruits" %}selected{% endif %}>Fruits</option>
+            <option value="dairy" {% if category == "dairy" %}selected{% endif %}>Dairy</option>
+            <option value="grains" {% if category == "grains" %}selected{% endif %}>Grains</option>
+            <option value="other" {% if category == "other" %}selected{% endif %}>Other</option>
+        </select>
+        <button type="submit" class="btn btn-success">Search</button>
+    </div>
+</form>
+
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="product-image-container">
+                <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Rs. {{ product.price }}/{{ product.get_variation_display }}</p>
+                <span class="badge bg-primary">{{ product.get_category_display }}</span>
+                <div class="mt-2">
+                    {% if product.average_rating %}
+                        <div class="rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= product.average_rating %}
+                                    <i class="fas fa-star text-warning"></i>
+                                {% else %}
+                                    <i class="far fa-star text-warning"></i>
+                                {% endif %}
+                            {% endfor %}
+                            <span class="text-muted">({{ product.average_rating|floatformat:1 }})</span>
+                        </div>
+                    {% else %}
+                        <div class="rating">
+                            <span class="text-muted">No ratings yet</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="mt-2">
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-success" target="_blank"> <i class="fa-solid fa-eye"></i>  View Details</a>
+                    <a target="_blank" href="{% url 'cart:add_to_cart' product.id %}" class="btn btn-warning"><i class="fa-solid fa-cart-plus"></i>  Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

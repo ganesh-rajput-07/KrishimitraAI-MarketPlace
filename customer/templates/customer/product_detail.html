@@ -1,0 +1,74 @@
+<!-- templates/customer/product_detail.html -->
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image Section -->
+        <div class="col-md-6">
+            <div class="product-image-container shadow-lg rounded">
+                <img src="{{ product.image.url }}" class="product-image img-fluid" alt="{{ product.name }}">
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="col-md-6">
+            <h2 class="display-4 mb-4">{{ product.name }}</h2>
+            <p class="lead text-muted">{{ product.description }}</p>
+            <hr class="my-4">
+
+            <!-- Product Information -->
+            <div class="product-info mb-4">
+                <p class="h5"><strong>Price:</strong> <span class="text-success">Rs. {{ product.price }}/{{ product.get_variation_display }}</span></p>
+                <p class="h5"><strong>Category:</strong> <span class="text-primary">{{ product.get_category_display }}</span></p>
+                <p class="h5"><strong>Quantity Available:</strong> <span class="text-warning">{{ product.quantity }} {{product.get_variation_display}}</span></p>
+                <p class="h5"><strong>Sold By:</strong> <span class="text-info">{{ product.farmer.user.username }}</span></p>
+                <p class="h5"><strong>Farm Name:</strong> <span class="text-secondary">{{ product.farmer.farm_name }}</span></p>
+                <p class="h5"><strong>Location:</strong> <span class="text-secondary">{{ product.farmer.location }}</span></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-3 d-md-block">
+                <a target="_blank" href="{% url 'cart:add_to_cart' product.id %}" class="btn btn-success btn-lg me-2">
+                    <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                </a>
+                <a href="{% url 'submit_review' product.id %}" class="btn btn-warning btn-lg">
+                    <i class="fa fa-star"></i> Leave a Review
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="mt-5">
+        <h3 class="display-5 mb-4">Customer Reviews</h3>
+        <div class="row">
+            {% for review in product.reviews.all %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-user-circle fa-3x me-3 text-secondary"></i>
+                            <h5 class="card-title mb-0">{{ review.user.username }}</h5>
+                        </div>
+                        <p class="card-text">{{ review.comment }}</p>
+                        <p class="card-text">
+                            <strong>Rating:</strong>
+                            <span class="text-warning">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

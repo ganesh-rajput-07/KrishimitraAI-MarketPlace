@@ -1,0 +1,159 @@
+<!-- templates/customer/submit_review.html -->
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white">
+                    <h2 class="card-title mb-0">
+                        <i class="fas fa-star"></i> Submit a Review for {{ product.name }}
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <!-- Rating Field -->
+                        <div class="mb-4">
+                            <label for="rating" class="form-label h5">Rating</label>
+                            <div class="star-rating">
+                                {% for i in "12345" %}
+                                    <i class="far fa-star fa-2x star" data-value="{{ forloop.counter }}"></i>
+                                {% endfor %}
+                            </div>
+                            <input type="hidden" name="rating" id="rating" value="0">
+                        </div>
+
+                        <!-- Comment Field -->
+                        <div class="mb-4">
+                            <label for="comment" class="form-label h5">Comment</label>
+                            <textarea name="comment" id="comment" class="form-control" rows="5" placeholder="Share your thoughts..."></textarea>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fas fa-save"></i> Submit Review
+                            </button>
+                            <a href="{% url 'product_detail' product.id %}" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>/* Stylish Submit Review Page */
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background-color: #28a745;
+        padding: 1.5rem;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .card-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    
+    .card-body {
+        padding: 2rem;
+    }
+    
+    .star-rating {
+        display: flex;
+        gap: 10px;
+        margin-top: 0.5rem;
+    }
+    
+    .star-rating .star {
+        cursor: pointer;
+        color: #ddd;
+        transition: color 0.2s ease;
+    }
+    
+    .star-rating .star:hover,
+    .star-rating .star.active {
+        color: #ffc107;
+    }
+    
+    .form-label {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #333;
+    }
+    
+    .form-control {
+        border-radius: 10px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.25rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+    
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+    
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: translateY(-2px);
+    }</style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const stars = document.querySelectorAll('.star-rating .star');
+            const ratingInput = document.getElementById('rating');
+    
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    const value = this.getAttribute('data-value');
+                    ratingInput.value = value;
+    
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-value') <= value) {
+                            s.classList.add('active');
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        } else {
+                            s.classList.remove('active');
+                            s.classList.remove('fas');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+{% endblock %}
